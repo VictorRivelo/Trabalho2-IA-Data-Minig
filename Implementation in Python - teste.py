@@ -70,7 +70,7 @@ length = testInstance.shape[1]
     # quem seria o key para nosso problema ?
     sorted_d = sorted(distances.items(), key=operator.itemgetter(1))
     #### fim do Passo 3.2
-
+lalala
 ### Vizinhança
 
  #### Inicio do Passo 3.3
