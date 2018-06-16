@@ -8,7 +8,7 @@ import math
 import operator
 #### Start of STEP 1
 # Importing data 
-data = pd.read_csv("iris.csv")
+data = pd.read_csv("train.csv")
 #### End of STEP 1
 
 data.head() 
