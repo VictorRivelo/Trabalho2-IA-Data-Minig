@@ -4,7 +4,7 @@ Implementation in Python from scratch
 ## 26, 37,  
 
 # Duvida
-# 61, 
+# 61, 68
 
 
 # Etapas do cósigo
@@ -63,6 +63,7 @@ length = testInstance.shape[1]
         #### Fim do passo 3.1
 
 #### Inicio do Passo 3.2 
-    # Sorting them on the basis of distance
+    # ordenando baseado na distancia
+    # quem seria o key para nosso problema
     sorted_d = sorted(distances.items(), key=operator.itemgetter(1))
     #### End of STEP 3.2
