@@ -4,7 +4,7 @@
 ## teste1, erro de 0,5% aproximadamente
 import math
 
-def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+def distance1(originlatitude, originlongitude, destLatitude, destLongitude):
     lat1 = originlatitude
     lon1 = originlongitude
     lat2 = destLatitude
@@ -24,7 +24,7 @@ def distance(originlatitude, originlongitude, destLatitude, destLongitude):
 ##teste2
 import geopy.distance
 
-def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+def distance2(originlatitude, originlongitude, destLatitude, destLongitude):
 
 coords_1 = (originlatitude, originlongitude)
 coords_2 = (destLatitude, destLongitude)
@@ -34,7 +34,7 @@ return geopy.distance.vincenty(coords_1, coords_2).km
 ##teste 3 
 from geopy.distance import geodesic
 
-def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+def distance3(originlatitude, originlongitude, destLatitude, destLongitude):
 coords_1 = (originlatitude, originlongitude)
 coords_2 = (destLatitude, destLongitude)
 
@@ -46,5 +46,10 @@ return (geodesic(coords_1, coords_2).miles * 1,60934)
 
 def distMedia():
 
-    return 
+data = pd.read_csv('dados_preprocessados.csv')
+
+
+
+
+    return 0
 
