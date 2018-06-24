@@ -1,8 +1,3 @@
-##Converter as coordenadas em um local em um ponto
-def gpsdData(dataLatitude, dataLongitude):
-
-    return 
-
 ##calcular a dist entre dois pontos
 ##latitude e longitude utilizadas em segundos
 
@@ -26,7 +21,6 @@ def distance(originlatitude, originlongitude, destLatitude, destLongitude):
     return d
 } 
 
-
 ##teste2
 import geopy.distance
 
@@ -35,10 +29,22 @@ def distance(originlatitude, originlongitude, destLatitude, destLongitude):
 coords_1 = (originlatitude, originlongitude)
 coords_2 = (destLatitude, destLongitude)
 
-print geopy.distance.vincenty(coords_1, coords_2).km
+return geopy.distance.vincenty(coords_1, coords_2).km
+
+##teste 3 
+from geopy.distance import geodesic
+
+def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+coords_1 = (originlatitude, originlongitude)
+coords_2 = (destLatitude, destLongitude)
+
+return (geodesic(coords_1, coords_2).miles * 1,60934)
+
+
 
 ##Calcula a dist média para cada motorista 
 
 def distMedia():
 
     return 
+
