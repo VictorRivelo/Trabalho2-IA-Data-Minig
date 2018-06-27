@@ -1,15 +1,10 @@
-##Converter as coordenadas em um local em um ponto
-def gpsdData(dataLatitude, dataLongitude):
-
-    return 
-
 ##calcular a dist entre dois pontos
 ##latitude e longitude utilizadas em segundos
 
 ## teste1, erro de 0,5% aproximadamente
 import math
 
-def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+def distance1(originlatitude, originlongitude, destLatitude, destLongitude):
     lat1 = originlatitude
     lon1 = originlongitude
     lat2 = destLatitude
@@ -26,19 +21,51 @@ def distance(originlatitude, originlongitude, destLatitude, destLongitude):
     return d
 } 
 
-
 ##teste2
 import geopy.distance
 
-def distance(originlatitude, originlongitude, destLatitude, destLongitude):
+def distance2(originlatitude, originlongitude, destLatitude, destLongitude):
 
 coords_1 = (originlatitude, originlongitude)
 coords_2 = (destLatitude, destLongitude)
 
-print geopy.distance.vincenty(coords_1, coords_2).km
+return geopy.distance.vincenty(coords_1, coords_2).km
+
+##teste 3 
+from geopy.distance import geodesic
+
+def distance3(originlatitude, originlongitude, destLatitude, destLongitude):
+coords_1 = (originlatitude, originlongitude)
+coords_2 = (destLatitude, destLongitude)
+
+return (geodesic(coords_1, coords_2).miles * 1,60934)
+
+
 
 ##Calcula a dist média para cada motorista 
+import pandas as pd
+import numpy as np
 
-def distMedia():
+def distMedia(arquivoPreProcessado):
 
-    return 
+Matriz_distancias = pd.DataFrame()
+data = pd.read_csv('dados_preprocessados.csv') 
+
+ (data.columns - 1) 
+ data.describe() # estatisticas da base
+ data['Lat'].describe()
+ data['Long'].describe()
+
+#http://minerandodados.com.br/index.php/2017/09/26/python-para-analise-de-dados/
+'''def categoriza(s):
+if s >= 80:
+       return 'Big'
+    elif s >= 60:
+       return 'Medium'
+    elif s >= 40:
+       return 'Small'
+       
+ataset['cat_size'] = dataset['size'].apply(categoriza)
+'''
+    return 0
+
