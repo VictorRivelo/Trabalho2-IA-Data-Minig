@@ -1,5 +1,20 @@
 testando edição
 
+Feriados de portugal:
+01/01
+25/04
+1/5
+31/5
+10/6
+15/8
+5/10
+1/11
+1/12
+8/12
+25/12
+
+
+
 
 # https://docs.python.org/2/library/datetime.html#datetime.date.weekday
 
