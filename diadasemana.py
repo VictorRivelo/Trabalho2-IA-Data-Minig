@@ -1,3 +1,6 @@
+testando edição
+
+
 # https://docs.python.org/2/library/datetime.html#datetime.date.weekday
 
 # date.weekday()
