@@ -52,10 +52,20 @@ Matriz_distancias = pd.DataFrame()
 data = pd.read_csv('dados_preprocessados.csv') 
 
  (data.columns - 1) 
+ data.describe() # estatisticas da base
+ data['Lat'].describe()
+ data['Long'].describe()
 
-
-
-
-
+#http://minerandodados.com.br/index.php/2017/09/26/python-para-analise-de-dados/
+'''def categoriza(s):
+if s >= 80:
+       return 'Big'
+    elif s >= 60:
+       return 'Medium'
+    elif s >= 40:
+       return 'Small'
+       
+ataset['cat_size'] = dataset['size'].apply(categoriza)
+'''
     return 0
 
