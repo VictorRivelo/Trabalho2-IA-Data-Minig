@@ -43,10 +43,16 @@ return (geodesic(coords_1, coords_2).miles * 1,60934)
 
 
 ##Calcula a dist média para cada motorista 
+import pandas as pd
+import numpy as np
 
-def distMedia():
+def distMedia(arquivoPreProcessado):
 
-data = pd.read_csv('dados_preprocessados.csv')
+Matriz_distancias = pd.DataFrame()
+data = pd.read_csv('dados_preprocessados.csv') 
+
+ (data.columns - 1) 
+
 
 
 
