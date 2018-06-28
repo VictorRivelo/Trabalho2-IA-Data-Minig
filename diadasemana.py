@@ -33,8 +33,7 @@ for x in range(0, size):
     d_weekday_l.append(d_weekday)
 
 
-new_columns = ['DAY', 'MONTH', 'YEAR', 'DAY_WEEK']
-file[new_columns] = [d_dia_l, d_mes_l, d_ano_l, d_weekday_l]
+file['DAY'] = d_dia_l 
 file.to_csv('teste.csv', index = False)
 
 #
