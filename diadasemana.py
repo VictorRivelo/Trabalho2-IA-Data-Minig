@@ -37,8 +37,14 @@ d_mes_l = ['MES'] + d_mes_l
 d_ano_l = ['ANO'] + d_ano_l
 d_weekday_l = ['WEEK_DAY'] + d_weekday_l
 
-se = pd.Series(d_dia_l)
-file['DAY'] = se
+sday = pd.Series(d_dia_l)
+smonth = pd.Series(d_mes_l)
+syear = pd.Series(d_ano_l)
+sweekday = pd.Series(d_weekday_l)
+file['DAY'] = sday 
+file['MONTH'] = smonth
+file['YEAR'] = syear
+file['WEEK_DAY'] = sweekday
 file.to_csv('teste.csv', index = False, header = None)
 
 #
