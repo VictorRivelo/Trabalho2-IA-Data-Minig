@@ -35,7 +35,7 @@ for x in range(0, size):
 file.to_csv('teste.csv', header = None)
 se = pd.Series(d_dia_l)
 file['DAY'] = se
-file.to_csv('teste.csv', index = False)
+file.to_csv('teste.csv', index = False, header = None)
 
 #
 # for x in range(0, size):
