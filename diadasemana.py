@@ -33,7 +33,8 @@ for x in range(0, size):
     d_weekday_l.append(d_weekday)
 
 
-file['DAY'] = d_dia_l 
+se = pd.Series(d_dia_l)
+file['DAY'] = se
 file.to_csv('teste.csv', index = False)
 
 #
