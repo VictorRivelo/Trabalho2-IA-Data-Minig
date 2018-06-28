@@ -39,7 +39,6 @@ def discretiza_trajetorias(dados, numero_de_quadrantes, precisa_separar_lat_long
 	print('linha 117 antes de discretizar')
 	print(matriz_discretizada.loc[117,:])
 
-	matriz_discretizada.loc[27,:].to_csv('linha27antes.csv')	
 	
 	i = 0
 	print('discretizando')
@@ -58,9 +57,6 @@ def discretiza_trajetorias(dados, numero_de_quadrantes, precisa_separar_lat_long
 	print('resultado final')
 	print(matriz_discretizada)
 
-	print('linha 27')
-	print(matriz_discretizada.loc[28,:])
-	matriz_discretizada.loc[28,:].to_csv('linha28depoisdepois.csv')
 	matriz_discretizada.to_csv('dados_preprocessados.csv')
 
 	return 0
@@ -76,13 +72,7 @@ def move_classe_para_ultima_coluna(dados):
 	print('colocando classe na matriz')
 	for index, linha in dados.iterrows():
 		#print('detalhes da linha',linha.name)
-		#print(linha)
-
-
-		if(linha.name == 27):
-			print('ACHOU 27 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-			dados.loc[linha.name,:].to_csv('linha27depois.csv')
-			
+		#print(linha)	
 
 		#print('linha',i)
 		ultimo_indice_valido = linha.last_valid_index()
