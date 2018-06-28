@@ -32,10 +32,11 @@ for x in range(0, size):
     d_dia_l.append(d_dia)
     d_weekday_l.append(d_weekday)
 
-['DAY'] + d_dia_l
-['MES'] + d_mes_l
-['ANO'] + d_ano_l
-['WEEK_DAY'] + d_weekday_l
+d_dia_l = ['DAY'] + d_dia_l
+d_mes_l = ['MES'] + d_mes_l
+d_ano_l = ['ANO'] + d_ano_l
+d_weekday_l = ['WEEK_DAY'] + d_weekday_l
+
 se = pd.Series(d_dia_l)
 file['DAY'] = se
 file.to_csv('teste.csv', index = False, header = None)
