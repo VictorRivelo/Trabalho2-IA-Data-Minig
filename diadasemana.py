@@ -34,6 +34,7 @@ for x in range(0, size):
 
 file.to_csv('teste.csv', index = False)
 
+#
 # for x in range(0, size):
     
 
