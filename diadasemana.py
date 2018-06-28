@@ -32,7 +32,7 @@ for x in range(0, size):
     d_dia_l.append(d_dia)
     d_weekday_l.append(d_weekday)
 
-file.to_csv('teste.csv', index = False, header = False)
+file.to_csv('teste.csv', header = False)
 
 #
 # for x in range(0, size):
