@@ -2,9 +2,9 @@ import datetime
 import pandas as pd
 
 colnames = ['TRIP_ID', 'CALL_TYPE', 'ORIGIN_CALL', 'ORIGIN_STAND', 'TAXI_ID', 'TIMESTAMP', 'DAY_TYPE', 'MISSING_DATA', 'POLYLINE']
-file_read = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv', names=colnames)
+file = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv', names=colnames)
 
-timestamp = file_read.TIMESTAMP.tolist()
+timestamp = file.TIMESTAMP.tolist()
 
 size = len(timestamp) - 1
 
@@ -32,7 +32,23 @@ for x in range(0, size):
     d_dia_l.append(d_dia)
     d_weekday_l.append(d_weekday)
 
-for x in range(0, size):
+d_dia_l = ['DAY'] + d_dia_l
+d_mes_l = ['MONTH'] + d_mes_l
+d_ano_l = ['YEAR'] + d_ano_l
+d_weekday_l = ['WEEK_DAY'] + d_weekday_l
+
+sday = pd.Series(d_dia_l)
+smonth = pd.Series(d_mes_l)
+syear = pd.Series(d_ano_l)
+sweekday = pd.Series(d_weekday_l)
+file['DAY'] = sday 
+file['MONTH'] = smonth
+file['YEAR'] = syear
+file['WEEK_DAY'] = sweekday
+file.to_csv('teste.csv', index = False, header = None)
+
+#
+# for x in range(0, size):
     
 
 
