@@ -33,8 +33,8 @@ for x in range(0, size):
     d_weekday_l.append(d_weekday)
 
 d_dia_l = ['DAY'] + d_dia_l
-d_mes_l = ['MES'] + d_mes_l
-d_ano_l = ['ANO'] + d_ano_l
+d_mes_l = ['MONTH'] + d_mes_l
+d_ano_l = ['YEAR'] + d_ano_l
 d_weekday_l = ['WEEK_DAY'] + d_weekday_l
 
 sday = pd.Series(d_dia_l)
