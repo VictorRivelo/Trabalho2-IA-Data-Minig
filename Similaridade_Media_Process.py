@@ -12,38 +12,21 @@ Created on Wed Jun 27 17:49:42 2018
 import math
 import pandas as pd
 import numpy as np
-#import geopy.distance
-#from geopy.distance import geodesic
 
-def delimitadorless(Coordenada):
-    
-    return Coordenada.strip('(').strip(']').split(',')
-  
 
-def distMedia(arquivoPreProcessado):
+def haversine(lat1, lon1, lat2, lon2):
 
-    Matriz_distancias = pd.DataFrame()
-    data = pd.read_csv('dados_preprocessados.csv') 
-   
-    Matriz_distancias = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'])    
+      R = 3959.87433 # this is in miles.  For Earth radius in kilometers use 6372.8 km
 
-    mediaLat= ((delimitadorless(Matriz_distancias[0][0])[0]).to_numeric + (delimitadorless(Matriz_distancias[0][0])[1])).to_numeric / 2
-    mediaLong= ((delimitadorless(Matriz_distancias[1][0])[0]).to_numeric + (delimitadorless(Matriz_distancias[1][0])[1])).to_numeric / 2
-    print(mediaLat)
-    print(mediaLong)
-    
-    distance1(mediaLat, mediaLong)    
-    
-  #  for i in range  
-  #     mediaLat=(((delimitadorless(Matriz_distancias[0][0])[1]) + (delimitadorless(Matriz_distancias[0][0])[2])) / 2)
-  #     mediaLong=(((delimitadorless(Matriz_distancias[1][1])[1]) + (delimitadorless(Matriz_distancias[1][1])[2])) / 2)
-  #  print(Matriz_distancias[0].min)
-    
-    
+      dLat = math.radians(lat2 - lat1)
+      dLon = math.radians(lon2 - lon1)
+      lat1 = math.radians(lat1)
+      lat2 = math.radians(lat2)
 
-    return 0
+      a = math.sin(dLat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dLon/2)**2
+      c = 2*math.asin(math.sqrt(a))
 
-distMedia('dados_preprocessados.csv')
+      return R * c
 
 def distance1(originlatitude, originlongitude, destLatitude, destLongitude):
     
@@ -63,27 +46,49 @@ def distance1(originlatitude, originlongitude, destLatitude, destLongitude):
     return d
 
 ##teste2
-def distance2(originlatitude, originlongitude, destLatitude, destLongitude):
-
-    coords_1 = (originlatitude, originlongitude)
-    coords_2 = (destLatitude, destLongitude)
 
     return geopy.distance.vincenty(coords_1, coords_2).km
 
-##teste 3 
 
+def delimitadorless(Coordenada):
+    
+    return Coordenada.strip('(').strip(']').split(',')
+  
+def media(Matriz_distancias1):
+    
+    return  (float(delimitadorless(Matriz_distancias1)[0]) + float(delimitadorless(Matriz_distancias1)[1])) / 2
+    
 
-def distance3(originlatitude, originlongitude, destLatitude, destLongitude):
-    coords_1 = (originlatitude, originlongitude)
-    coords_2 = (destLatitude, destLongitude)
+def distMedia(arquivoPreProcessado):
 
-    return (geodesic(coords_1, coords_2).miles * 1,60934)
+    Matriz_distancias = pd.DataFrame()
+    data = pd.read_csv('dados_preprocessados.csv') 
+    data2 = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv') 
+    Matriz_distancias = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'], data2['TRIP_ID']) 
+    
+    mediaLat0 = media(Matriz_distancias[0][0]) 
+    mediaLong0 = media(Matriz_distancias[1][0]) 
+    mediaClassLat = media(Matriz_distancias[2][0]) 
+    mediaClassLong = media(Matriz_distancias[3][0]) 
 
+    #distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+    #haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+  
+    size =  len(Matriz_distancias[4])
+    for i in range(0, size): 
+        
+        mediaLat0 = media(Matriz_distancias[0][i]) 
+        mediaLong0 = media(Matriz_distancias[1][i]) 
+        mediaClassLat = media(Matriz_distancias[2][i]) 
+        mediaClassLong = media(Matriz_distancias[3][i])
+        distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+        Matriz_distancias['Media_Distancia'] = distance
 
+  
+    return 0
 
+distMedia('dados_preprocessados.csv')
 
-
-##Calcula a dist média para cada motorista 
 
 
 
