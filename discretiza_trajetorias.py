@@ -12,13 +12,13 @@ def discretiza_trajetorias(dados, numero_de_quadrantes, precisa_separar_lat_long
 	matriz_discretizada = pd.DataFrame()
 	if(precisa_separar_lat_long):
 		matriz_discretizada = separa_polyline_em_latitudes_e_longitudes(dados)
-		print('matriz com polyline quebrado')
-		print(matriz_discretizada)
+		#print('matriz com polyline quebrado')
+		#print(matriz_discretizada)
 
-		print('matriz com outros dados')
-		print(matriz_com_outros_dados)
+		#print('matriz com outros dados')
+		#print(matriz_com_outros_dados)
 	
-		print('vai separar lat e long')
+		#print('vai separar lat e long')
 		matriz_discretizada.to_csv('dados_sem_colchete.csv')
 	else:
 		matriz_discretizada = dados.loc[:,'lat0':]
@@ -33,11 +33,11 @@ def discretiza_trajetorias(dados, numero_de_quadrantes, precisa_separar_lat_long
 	
 	#print('matriz sendo discretizada')
 	#print(matriz_discretizada)
-	print('matriz antes de discretizar')
-	print(matriz_discretizada)
+	#print('matriz antes de discretizar')
+	#print(matriz_discretizada)
 
-	print('linha 117 antes de discretizar')
-	print(matriz_discretizada.loc[117,:])
+	#print('linha 117 antes de discretizar')
+	#print(matriz_discretizada.loc[117,:])
 
 	
 	i = 0
@@ -54,12 +54,12 @@ def discretiza_trajetorias(dados, numero_de_quadrantes, precisa_separar_lat_long
 	
 	matriz_discretizada = move_classe_para_ultima_coluna(matriz_discretizada)
 
-	print('resultado final')
-	print(matriz_discretizada)
+	#print('resultado final')
+	#print(matriz_discretizada)
 
 	matriz_discretizada.to_csv('dados_preprocessados.csv')
 
-	return 0
+	return matriz_discretizada
 
 def move_classe_para_ultima_coluna(dados):
 	i = 0
@@ -67,7 +67,7 @@ def move_classe_para_ultima_coluna(dados):
 	
 	dados['classe_lat'] = np.nan
 	dados['classe_long'] = np.nan
-	print(dados)
+	#print(dados)
 
 	print('colocando classe na matriz')
 	for index, linha in dados.iterrows():
@@ -83,11 +83,11 @@ def move_classe_para_ultima_coluna(dados):
 		label_longitude_ultimo_indice_valido = 'long'+str(numero_ultimo_indice_valido)
 		#print('valor do ultimo ponto da trajetoria')
 		#print(linha[label_latitude_ultimo_indice_valido])
-		print('linha',linha.name)
-		print('numero do ultimo indice valido', numero_ultimo_indice_valido)
-		print('valor')
-		print(dados.loc[linha.name, label_latitude_ultimo_indice_valido])
-		print(dados.loc[linha.name, label_longitude_ultimo_indice_valido])
+		#print('linha',linha.name)
+		#print('numero do ultimo indice valido', numero_ultimo_indice_valido)
+		#print('valor')
+		#print(dados.loc[linha.name, label_latitude_ultimo_indice_valido])
+		#print(dados.loc[linha.name, label_longitude_ultimo_indice_valido])
 		#print(linha[label_longitude_ultimo_indice_valido])
 
 		#print('linha da matriz antes de receber a classe')
@@ -139,8 +139,8 @@ def separa_coordenadas_em_latitude_e_longitude(dados):
 
 
 	colunas = dados.loc[:,'coord0':]
-	print('colunas selecionadas pra quebrar em latitude e longitude')
-	print(colunas)
+	#print('colunas selecionadas pra quebrar em latitude e longitude')
+	#print(colunas)
 	
 	
 	i = 0
@@ -177,36 +177,36 @@ def separa_coordenadas_em_latitude_e_longitude(dados):
 		#print(dados)
 		i += 1
 
-	#print('matriz final')
-	#print(dados)
+	print('matriz final')
+	print(dados)
 	return dados
 
 def calcula_intervalos_de_discretizacao(coluna, numero_de_quadrantes):
 	max_coluna, min_coluna, range_coluna = calcula_range_da_coluna(coluna)
 	intervalos = np.linspace(start=min_coluna, stop=max_coluna, num=numero_de_quadrantes)
-	print('range', range_coluna)
+	#print('range', range_coluna)
 	return intervalos
 
 def calcula_range_da_coluna(column):
 	column = pd.to_numeric(column)
 	statistics = column.describe()
-	print(statistics)
+	#print(statistics)
 	column_max = statistics['max']
 	column_min = statistics['min']
 	column_range = np.absolute(column_max-column_min)
-	print(statistics)
-	print('max', column_max)
-	print('min', column_min)
-	print('range', column_range)
+	#print(statistics)
+	#print('max', column_max)
+	#print('min', column_min)
+	#print('range', column_range)
 	return column_max, column_min, column_range
 
 def separa_polyline_em_latitudes_e_longitudes(data):
-	print('matriz que vai ser ter a polyline separada em colunas')
-	print(data)
+	#print('matriz que vai ser ter a polyline separada em colunas')
+	#print(data)
 	matriz_com_coordenadas_em_colunas = separa_polyline_em_colunas_de_coordenadas(data)
-	print('separou polyline em coordenadas')
-	print(matriz_com_coordenadas_em_colunas)
-	print('vai separar as coordenadas em latitude e longitude')
+	#print('separou polyline em coordenadas')
+	#print(matriz_com_coordenadas_em_colunas)
+	#print('vai separar as coordenadas em latitude e longitude')
 	matriz_com_coordenadas_em_colunas = separa_coordenadas_em_latitude_e_longitude(matriz_com_coordenadas_em_colunas)
 	return matriz_com_coordenadas_em_colunas
 
@@ -229,12 +229,11 @@ def formata_polyline_para_separacao(data):
 	return data
 
 def monta_labels_das_colunas_da_trajetoria(column_num):
-	print('num colunas', column_num)
+	#print('num colunas', column_num)
 	columns = []	
 	for x in range(column_num):
 		columns.append('coord'+str(x))
 
 	return columns
 
-dados = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv')
-discretiza_trajetorias(dados, 100, True)
+
