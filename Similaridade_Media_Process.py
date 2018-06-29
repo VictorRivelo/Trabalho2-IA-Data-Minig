@@ -53,36 +53,36 @@ def media(Matriz_distancias1):
     
     return (float(delimitadorless(Matriz_distancias1)[0]) + float(delimitadorless(Matriz_distancias1)[1])) / 2 
 
-def distMedia(arquivoPreProcessado):
+def retiraLinhaNan(linhaMatriz):
 
+    return
+
+
+def distMedia(arquivoPreProcessado):
+    
+    print('carregando arquivos')
     Matriz_distancias = pd.DataFrame()
     data = pd.read_csv('dados_preprocessados.csv') 
     data2 = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv') 
     Matriz_distancias = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'], data2['TRIP_ID']) 
     
-    
-    
-    mediaLat0 = media(Matriz_distancias[0][0]) 
-    mediaLong0 = media(Matriz_distancias[1][0]) 
-    mediaClassLat = media(Matriz_distancias[2][0]) 
-    mediaClassLong = media(Matriz_distancias[3][0]) 
+    print('Retirando Not Numbers')
+    for i in range(0, 4): 
+        pd.isnull(Matriz_distancias[i]) #retorna um array Boolean - true - contem Nan
+        #lógica aqui
 
-    #distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-    #haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-  
-    size =  len(Matriz_distancias[4])
-    Media_Distancia = pd.DataFrame()
-    for i in range(0, size): 
-        mediaLat0 = media(Matriz_distancias[0][i]) 
-        mediaLong0 = media(Matriz_distancias[1][i]) 
-        mediaClassLat = media(Matriz_distancias[2][i]) 
-        mediaClassLong = media(Matriz_distancias[3][i])
-        distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-#       Media_Distancia = distance
+    print('calculando média de distancias')
+  #  size =  len(Matriz_distancias[4])
+  #  Media_Distancia = pd.DataFrame()
+  #  for i in range(0, size): 
+  #      mediaLat0 = media(Matriz_distancias[0][i]) 
+  #      mediaLong0 = media(Matriz_distancias[1][i]) 
+  #      mediaClassLat = media(Matriz_distancias[2][i]) 
+  #      mediaClassLong = media(Matriz_distancias[3][i])
+  #  forma1    distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+  #  forma2    haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+  #      Media_Distancia = distance
     
-    print(distance)
-#    print(Media_Distancia)
-
     return 0
 
 distMedia('dados_preprocessados.csv')
