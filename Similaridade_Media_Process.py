@@ -2,7 +2,7 @@
 """
 Created on Wed Jun 27 17:49:42 2018
 
-@author: CPU
+@author: Victor Luiz Fortes Rivelo
 """
 
 ##calcular a dist entre dois pontos
@@ -45,19 +45,13 @@ def distance1(originlatitude, originlongitude, destLatitude, destLongitude):
 
     return d
 
-##teste2
-
-    return geopy.distance.vincenty(coords_1, coords_2).km
-
-
 def delimitadorless(Coordenada):
     
     return Coordenada.strip('(').strip(']').split(',')
   
 def media(Matriz_distancias1):
     
-    return  (float(delimitadorless(Matriz_distancias1)[0]) + float(delimitadorless(Matriz_distancias1)[1])) / 2
-    
+    return (float(delimitadorless(Matriz_distancias1)[0]) + float(delimitadorless(Matriz_distancias1)[1])) / 2 
 
 def distMedia(arquivoPreProcessado):
 
@@ -65,6 +59,8 @@ def distMedia(arquivoPreProcessado):
     data = pd.read_csv('dados_preprocessados.csv') 
     data2 = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv') 
     Matriz_distancias = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'], data2['TRIP_ID']) 
+    
+    
     
     mediaLat0 = media(Matriz_distancias[0][0]) 
     mediaLong0 = media(Matriz_distancias[1][0]) 
@@ -75,22 +71,21 @@ def distMedia(arquivoPreProcessado):
     #haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
   
     size =  len(Matriz_distancias[4])
+    Media_Distancia = pd.DataFrame()
     for i in range(0, size): 
-        
         mediaLat0 = media(Matriz_distancias[0][i]) 
         mediaLong0 = media(Matriz_distancias[1][i]) 
         mediaClassLat = media(Matriz_distancias[2][i]) 
         mediaClassLong = media(Matriz_distancias[3][i])
         distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-        Matriz_distancias['Media_Distancia'] = distance
+#       Media_Distancia = distance
+    
+    print(distance)
+#    print(Media_Distancia)
 
-  
     return 0
 
 distMedia('dados_preprocessados.csv')
-
-
-
 
 #http://minerandodados.com.br/index.php/2017/09/26/python-para-analise-de-dados/
 '''def categoriza(s):
