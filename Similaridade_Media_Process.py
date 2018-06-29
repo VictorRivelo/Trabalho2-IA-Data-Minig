@@ -80,6 +80,8 @@ def distMedia(arquivoPreProcessado):
     tempClassLong = retiraLinhaNan(Matriz_distancias_comNan[3])
     tempTripID = retiraLinhaNan(Matriz_distancias_comNan[4])
     
+    Matriz_distancias_comNan.dropna(subset=['lat0'])
+    
     Matriz_distancias_semNan = (tempLat0, tempLong0, tempClassLat, tempClassLong, tempTripID)
     
     #por dropar separadamente temos que excçuior as linhas de lat0 que não tem em long0 por exemplo
@@ -95,16 +97,14 @@ def distMedia(arquivoPreProcessado):
         mediaLong0 = media(Matriz_distancias_semNan[1][0]) 
         mediaClassLat = media(Matriz_distancias_semNan[2][0]) 
         mediaClassLong = media(Matriz_distancias_semNan[3][0])
-        distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+        distance = distance1(mediaLat0, mediaLong0, mediaClassLat, mediaClassLong)
         #  forma2 haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
       
         #se o ID existir soma a distance   
         #if (Media_Distancia.str.contains(Matriz_distancias_semNan[4][i], regex=False))
             #Media_Distancia[i] += distance
         #else
-            
-    
-
+        #Help
     return 0
 
 distMedia('dados_preprocessados.csv')
