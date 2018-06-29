@@ -53,36 +53,58 @@ def media(Matriz_distancias1):
     
     return (float(delimitadorless(Matriz_distancias1)[0]) + float(delimitadorless(Matriz_distancias1)[1])) / 2 
 
-def retiraLinhaNan(linhaMatriz):
+def retiraLinhaNan(Matriz_distancias_comNan):
 
-    return
+    matrizTemp = Matriz_distancias_comNan.dropna()
+    return matrizTemp
 
 
 def distMedia(arquivoPreProcessado):
     
     print('carregando arquivos')
-    Matriz_distancias = pd.DataFrame()
+    Matriz_distancias_comNan = pd.DataFrame()
+    Matriz_distancias_semNan = pd.DataFrame()
     data = pd.read_csv('dados_preprocessados.csv') 
     data2 = pd.read_csv('DADOS_TREINAMENTO_REDUZIDO.csv') 
-    Matriz_distancias = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'], data2['TRIP_ID']) 
+    Matriz_distancias_comNan = (data['lat0'], data['long0'], data['classe_lat'], data['classe_long'], data2['TRIP_ID']) 
     
     print('Retirando Not Numbers')
-    for i in range(0, 4): 
-        pd.isnull(Matriz_distancias[i]) #retorna um array Boolean - true - contem Nan
-        #lógica aqui
+    #templat =  retiraLinhaNan(Matriz_distancias_comNan)
 
-    print('calculando média de distancias')
-  #  size =  len(Matriz_distancias[4])
-  #  Media_Distancia = pd.DataFrame()
-  #  for i in range(0, size): 
-  #      mediaLat0 = media(Matriz_distancias[0][i]) 
-  #      mediaLong0 = media(Matriz_distancias[1][i]) 
-  #      mediaClassLat = media(Matriz_distancias[2][i]) 
-  #      mediaClassLong = media(Matriz_distancias[3][i])
-  #  forma1    distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-  #  forma2    haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
-  #      Media_Distancia = distance
+    #retiro os Nan coluna a coluna, pq usando a matriz toda da pau :/ 
+    #teste= Matriz_distancias_comNan.dropna()
     
+    tempLat0 = retiraLinhaNan(Matriz_distancias_comNan[0])
+    tempLong0 = retiraLinhaNan(Matriz_distancias_comNan[1])
+    tempClassLat = retiraLinhaNan(Matriz_distancias_comNan[2])
+    tempClassLong = retiraLinhaNan(Matriz_distancias_comNan[3])
+    tempTripID = retiraLinhaNan(Matriz_distancias_comNan[4])
+    
+    Matriz_distancias_semNan = (tempLat0, tempLong0, tempClassLat, tempClassLong, tempTripID)
+    
+    #por dropar separadamente temos que excçuior as linhas de lat0 que não tem em long0 por exemplo
+    #Help
+    
+    print('calculando média de distancias')
+    size =  len(Matriz_distancias_semNan[4])
+    Media_Distancia = pd.DataFrame()
+    Media_Distancia = (tempTripID, )
+    
+    for i in range(0, size):     
+        mediaLat0 = media(Matriz_distancias_semNan[0][0])
+        mediaLong0 = media(Matriz_distancias_semNan[1][0]) 
+        mediaClassLat = media(Matriz_distancias_semNan[2][0]) 
+        mediaClassLong = media(Matriz_distancias_semNan[3][0])
+        distance = distance1(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+        #  forma2 haversine = haversine(mediaLat0, mediaLong0 ,mediaClassLat, mediaClassLong)
+      
+        #se o ID existir soma a distance   
+        #if (Media_Distancia.str.contains(Matriz_distancias_semNan[4][i], regex=False))
+            #Media_Distancia[i] += distance
+        #else
+            
+    
+
     return 0
 
 distMedia('dados_preprocessados.csv')
